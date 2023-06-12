@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Set-Up</title>
+<link rel="stylesheet" href="Log&Sign.css">
+  
+</head>
+<body>
+  <div class="container">
+    <h1 id="form-heading">User Login</h1>
+    <h3 id="form-heading">Input Anything</h3>
+	
+    <!-- Login Form -->
+	<form id="login-form">
+		<div class="form-group">
+			<label for="login-email">Email:</label>
+			<input type="email" id="login-email" name="login-email" required style="height: 15px; width: 315.08px;">
+		</div>
+		<div class="form-group">
+			<label for="login-password">Password:</label>
+			<input type="password" id="login-password" name="login-password" required style="height: 15px; width: 315.08px;">
+		</div>
+		<div class="form-group">
+			<label for="user">Buyer or Supplier?</label>
+			<select id="user" name="user">
+			<option value="Buyer">Buyer</option>
+			<option value="Supplier">Supplier</option>  
+			</select>
+		</div>
+		<div class="button-group">
+		<button type="submit">Log in</button>
+		</div>
+		<div class="login-button">
+			<a href="#" id="signup-button-link" onclick="toggleForm()">Don't have an account? Sign up</a>
+		</div>
+	</form>
+    
+    <!-- Sign-up Form (Initially Hidden) -->
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbzoRS0nwakrSh0GbWJYolsBYHH-Qvlo4-lk3NP-76452320A8dYY5i9Pydr-d1nE8NHIw/exec" id="signup-form" class="hide">
+	
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required style="height: 15px; width: 315.08px;">
+      </div>	 
+	  
+      <div class="form-group">	  
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required style="height: 15px; width: 315.08px;">
+      </div>
+	  
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required style="height: 15px; width: 315.08px;">
+      </div>
+	  
+	  <div class="form-group">
+		<label for="user">Buyer or Supplier?</label>
+		<select id="user" name="user" >
+		<option value="Buyer">Buyer</option>
+		<option value="Supplier">Supplier</option>  
+		</select>
+	  </div>
+	  
+      <div class="button-group">
+        <button type="submit">Sign up</button>
+      </div>
+      <div class="login-button">
+        <a href="#" id="login-button-link" onclick="toggleForm()">Already have an account? Log in</a>
+      </div>
+    </form>
+  </div>
+
+    <script>
+    function toggleForm() {
+      var signupForm = document.getElementById("signup-form");
+      var loginForm = document.getElementById("login-form");
+      var heading = document.getElementById("form-heading");
+      
+      signupForm.classList.toggle("hide");
+      loginForm.classList.toggle("hide");
+      
+      if (heading.innerText === "User Sign-up") {
+        heading.innerText = "User Login";
+      } else {
+        heading.innerText = "User Sign-up";
+      }
+    }
+    </script>
+	
+	
+	<script>
+	var loginForm = document.getElementById('login-form');
+		loginForm.addEventListener("submit", function(e) {
+		e.preventDefault();
+		var userSelect = document.getElementById("user");
+		var selectedOption = userSelect.options[userSelect.selectedIndex].value;
+    
+		if (selectedOption === "Buyer") {
+			window.location.href = 'zBuyer.html';
+		} else if (selectedOption === "Supplier") {
+			window.location.href = 'zSupplier.html';
+		}
+	});
+	</script>
+	
+	<script>
+        var form = document.getElementById('signup-form');
+		form.addEventListener("submit", e => {
+			e.preventDefault();
+			fetch(form.action, {
+				method : "POST",
+				body: new FormData(document.getElementById("signup-form")),
+			}).then(
+				response => response.json()
+			).then((html) => {
+			// you can put any JS code here
+			window.location.href = 'User.html';
+		});
+	});
+    </script>
+		
+  </div>
+</body>
+</html>
